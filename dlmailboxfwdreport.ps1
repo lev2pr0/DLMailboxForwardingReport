@@ -45,7 +45,7 @@ Function main{
 
 }
 
-# Export results to CSV for report
+# Export results to CSV for report function
 Function report_csv {
     param(
         [array]$results
