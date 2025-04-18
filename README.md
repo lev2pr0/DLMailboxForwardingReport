@@ -47,43 +47,51 @@ Skips the connection to Exchange Online sessions entirely for Exchange Managemen
 <br></br>
 ## Usage Examples
 
-### Run the function to generate a report for Public Distribution Lists for Exchange Online examples
+### Run the function to generate a report for Exchange Online examples
 ```powershell
-publicDLreport -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports"
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports"
 ```
 ```powershell
-publicDLreport -Domains "domain1.com,domain2.com"
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com"
 ```
 
 #
 
-### Run the function to generate a report for Public Distribution Lists for Exchange On-Premise examples
+### Run the function to generate a report for Exchange On-Premise examples
 ```powershell
-publicDLreport -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports" -onpremEX 
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports" -onpremEX 
 ```
 ```powershell
-publicDLreport -Domains "domain1.com,domain2.com" -onpremEX
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -onpremEX
 ```
+
+<br></br>
+## Demo
+
+### Report for Public Distribution Lists in directory
+![Screenshot_CSVinDirectory](https://github.com/user-attachments/assets/1617384b-65c4-40fa-868e-0f1c7b19d49f)
+
+**Important Note:** CSV report will show as *PublicDLreport_yyyyMMdd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
+
+#
+
+### CSV Report for Public Distribution Lists in Microsoft Excel
+![Screenshot_CSVinExcel](https://github.com/user-attachments/assets/c7efcddb-e678-4705-9100-347ab97c4b71)
+
+
+**Important Note:** PrimarySMTPAddress will show empty for internal members still apart of group with no mailbox. This will show an error in terminal and will be excluded from CSV report.
 
 ---
 
-### Run the function to generate a Mailbox Forward report for Exchange Online examples
-```powershell
-mailboxfwdreport -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports"
-```
-```powershell
-mailboxfwdreport -Domains "domain1.com,domain2.com"
-```
+### Report for Mailbox Forwarding in directory
+![Screenshot_CSVinDirectory](https://github.com/user-attachments/assets/df015eb1-14cd-465b-a9b3-8dbf36393279)
+
+**Important Note:** CSV report will show as *MailboxFWDReport_yyyyMMdd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
 
 #
 
-### Run the function to generate a Mailbox Forward report for Exchange On-Premise examples
-```powershell
-mailboxfwdreport -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports" -onpremEX 
-```
-```powershell
-mailboxfwdreport -Domains "domain1.com,domain2.com" -onpremEX
-```
+### CSV Report for Mailbox Forwarding in Microsoft Excel
+![Screenshot_CSVinExcel](https://github.com/user-attachments/assets/7465e627-548d-42f3-8f0e-88a3211a795e)
 
 <br></br>
 ## NOTES
