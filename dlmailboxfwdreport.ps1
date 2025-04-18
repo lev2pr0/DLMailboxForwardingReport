@@ -5,7 +5,7 @@ Main function to determine Exchange Online or On-premise and gather domains
 Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
-        [switch]$onpremEX
+        [switch]$onpremEX,
         [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
     )
 
