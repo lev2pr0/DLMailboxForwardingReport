@@ -75,8 +75,7 @@ Function dlmailboxfwdreport{
 Function report_csv {
     param(
         [array]$results,
-        [string]$reportType,
-        [string]$OutputPath
+        [string]$reportType
     )
     if ($results.Count -gt 0) {
         try {
