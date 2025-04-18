@@ -20,7 +20,7 @@ Together, these tools provide IT administrators and security professionals with 
 3. Open PowerShell as an administrator
 4. Use ```Set-ExecutionPolicy -ExecutionPolicy <VALUE> -Scope <VALUE>``` to change to acceptable [Execution Policy](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5#-executionpolicy)
 5. **Optional:** Navigate to directory location of script using ```cd``` command (Example: ```cd “C:\MyFolder”```)
-6. Run PowerShell Script ```.\<scriptname>.ps1``` or ```C:\MyFolder\<scriptname>.ps1```
+6. Run PowerShell Script ```.\<scriptname>.ps1 -Parameter1 <VALUE> -Parameter2 <VALUE>``` or ```C:\MyFolder\<scriptname>.ps1 -Parameter1 <VALUE> -Parameter2 <VALUE>```
 
 <br></br>
 ## Parameters 
