@@ -4,7 +4,7 @@
 
 ## Purpose 
 
-The Public Distribution List Report and Mailbox Forward Report are developed to enhance security auditing in Microsoft 365’s Exchange Online and on-premises Exchange environments.​
+The Public Distribution List and Mailbox Forward Reports are developed to enhance security auditing in Microsoft 365’s Exchange Online and on-premises Exchange environments.​
 
 - **Public Distribution List Report:** This automates the generation of reports identifying distribution lists that are open to external senders. Such openness can expose organizations to risks like phishing, whaling, and other social engineering attacks. By listing these distribution lists and their members, administrators can proactively manage and mitigate potential vulnerabilities.​
 
