@@ -55,9 +55,9 @@ Function dlmailboxfwdreport{
         $reportType = Read-Host "Enter the report type you want to run (publicDL or mailboxfwd)"
         
         if ([string]::IsNullOrEmpty($reportType)) {
-            Write-Host "Input cannot be empty. Please enter a valid report type." -ForegroundColor Red
+            Write-Host "Input cannot be empty. Please enter a valid report type. `n" -ForegroundColor Red
         } elseif ($reportType -notin @("publicDL", "mailboxfwd", "exit")) {
-            Write-Host "Invalid report type. Please enter 'publicDL' or 'mailboxfwd'" -ForegroundColor Red
+            Write-Host "Invalid report type. Please enter 'publicDL' or 'mailboxfwd' `n" -ForegroundColor Red
         }
     } while ([string]::IsNullOrEmpty($reportType) -or $reportType -notin @("publicDL", "mailboxfwd", "exit"))
 
