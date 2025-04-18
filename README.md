@@ -32,13 +32,6 @@ Together, these tools provide IT administrators and security professionals with 
 ## Parameters 
 
 ```powershell
--OutputPath
-```
-Allows the user to specify the location of the exported CSV file.
-
----
-
-```powershell
 -Domains
 ```
 Specifies the email domains to be used for filtering external members. This parameter accepts a comma-separated list of domains. If not provided, the script will end. 
@@ -49,6 +42,13 @@ Specifies the email domains to be used for filtering external members. This para
 -onpremEX
 ```
 Skips the connection to Exchange Online sessions entirely for Exchange Management Shell. Use this switch if you want to use for Exchange On-Premise.
+
+---
+
+```powershell
+-OutputPath
+```
+Allows the user to specify the location and name of the exported file.
 
 <br></br>
 ## Usage Examples
