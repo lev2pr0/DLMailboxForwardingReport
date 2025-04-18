@@ -6,6 +6,7 @@ Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
         [switch]$onpremEX
+        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
     )
 
     # Connect to Exchange Online and skips if -onpremEX switch is found
@@ -75,7 +76,6 @@ Function report_csv {
     param(
         [array]$results,
         [string]$reportType,
-        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
     )
     if ($results.Count -gt 0) {
         try {
