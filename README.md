@@ -1,14 +1,14 @@
-# Mailbox Forward and Public Distribution Group Report (WIP)
+# Public Distribution Group and Mailbox Forward Report (WIP)
 
 <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGlmcmhqeWZkejFnZHV3MnU2MTIxYjczNW9ldTJmdm1leDdsaXR4YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/vR1dPIYzQmkRzLZk2w/giphy.gif" width="200" height="200" />
 
 ## Purpose 
 
-The Public Distribution List Report and Mailbox Forward Report are two PowerShell scripts developed to enhance security auditing in Microsoft 365’s Exchange Online and on-premises Exchange environments.​
+The Public Distribution List Report and Mailbox Forward Report are developed to enhance security auditing in Microsoft 365’s Exchange Online and on-premises Exchange environments.​
 
-- **Public Distribution List Report:** This script automates the generation of reports identifying distribution lists that are open to external senders. Such openness can expose organizations to risks like phishing, whaling, and other social engineering attacks. By listing these distribution lists and their members, administrators can proactively manage and mitigate potential vulnerabilities.​
+- **Public Distribution List Report:** This automates the generation of reports identifying distribution lists that are open to external senders. Such openness can expose organizations to risks like phishing, whaling, and other social engineering attacks. By listing these distribution lists and their members, administrators can proactively manage and mitigate potential vulnerabilities.​
 
-- **Mailbox Forward Report:** This script focuses on detecting user and shared mailboxes that have configured forwarding SMTP addresses. Unauthorized forwarding can be a vector for insider threats and data exfiltration. The report aids in identifying such configurations, allowing for timely intervention to protect sensitive information.​
+- **Mailbox Forward Report:** This focuses on detecting user and shared mailboxes that have configured forwarding SMTP addresses. Unauthorized forwarding can be a vector for insider threats and data exfiltration. The report aids in identifying such configurations, allowing for timely intervention to protect sensitive information.​
 
 Together, these tools provide IT administrators and security professionals with automated solutions to monitor and secure their Exchange environments against external and internal threats.​
 
