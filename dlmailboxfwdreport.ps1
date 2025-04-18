@@ -48,8 +48,8 @@ Function dlmailboxfwdreport{
     # Prompt user for report type
     do {
         Write-Host "Available reports: `n" -ForegroundColor Yellow
-        Write-Host "1. publicDL - Public Distribution List Report" -ForegroundColor Yellow
-        Write-Host "2. mailboxfwd - Mailbox Forwarding Report `n" -ForegroundColor Yellow
+        Write-Host "1. publicDL - Designed to generate a report of members for Distribution Lists open to external senders" -ForegroundColor Yellow
+        Write-Host "2. mailboxfwd - Designed to generate a report on configured forwarding SMTP addresses on user or shared mailboxes `n" -ForegroundColor Yellow
         Write-Host "Type 'exit' to quit the script. `n" -ForegroundColor Yellow
         $reportType = Read-Host "Enter the report type you want to run (publicDL or mailboxfwd)"
         
