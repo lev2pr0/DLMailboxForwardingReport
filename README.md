@@ -83,7 +83,7 @@ Allows the user to specify the location and name of the exported file.
 
 <img width="807" alt="Terminal_View" src="https://github.com/user-attachments/assets/a93ef097-b6ea-4167-8a19-eaf49ce9fa2d" />
 
-**Important Note:** Shown after connecting to Exchange Online or skiping for Exchange On-premise and providing email domains
+**Important Note:** Shown after connecting to Exchange Online or skipping for Exchange On-premise and providing email domains
 
 #
 
