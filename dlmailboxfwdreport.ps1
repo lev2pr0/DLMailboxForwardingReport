@@ -169,7 +169,7 @@ Function mailboxfwd_report {
 
 ###########################
 
-#Call of main function to determine Exchange Online or On-premise, gather domains, and run report
+#Call of main function <name> to determine Exchange Online or On-premise, gather domains, and run report
 
 main 
 
