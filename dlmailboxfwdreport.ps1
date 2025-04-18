@@ -2,11 +2,11 @@
 Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
 Main function to determine Exchange Online or On-premise and gather domains
 #>
+
 Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
-        [switch]$onpremEX,
-        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
+        [switch]$onpremEX
     )
 
     # Connect to Exchange Online and skips if -onpremEX switch is found
