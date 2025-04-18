@@ -73,7 +73,8 @@ Function dlmailboxfwdreport{
 # Export results to CSV for report function
 Function report_csv {
     param(
-        [array]$results
+        [array]$results,
+        [string]$reportType,
         [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv" # Unique output path for each report
     )
     if ($results.Count -gt 0) {
@@ -123,7 +124,7 @@ Function publicDL_report {
         }
 
     # Export results to CSV
-    report_csv -results $results
+    report_csv -results $results -reportType "publicDLreport"
     # Display results in console  
 }
 
@@ -158,7 +159,7 @@ Function mailboxfwd_report {
     }
 
     # Export results to CSV
-    report_csv -results $results
+    report_csv -results $results -reportType "mailboxfwdreport"
     # Display results in console    
 }
 
