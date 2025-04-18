@@ -76,8 +76,8 @@ Function report_csv {
     param(
         [array]$results,
         [string]$reportType,
-        [string]$OutputPath
     )
+    
     if ($results.Count -gt 0) {
         try {
             Write-Host "Exporting results to CSV...`n" -ForegroundColor Cyan
