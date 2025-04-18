@@ -18,7 +18,7 @@ Together, these tools provide IT administrators and security professionals with 
 3. Open PowerShell as an administrator
 4. Use ```Set-ExecutionPolicy -ExecutionPolicy <VALUE> -Scope <VALUE>``` to change to acceptable [Execution Policy](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.5#-executionpolicy)
 5. **Optional:** Navigate to directory location of script using ```cd``` command (Example: ```cd “C:\MyFolder”```)
-6. Run PowerShell Script:
+6. Run PowerShell Script (See [Usage Examples](https://github.com/lev2pr0/DLMailboxForwardingReport/tree/main?tab=readme-ov-file#usage-examples)):
    ```powershell
    .\<scriptname>.ps1 -Parameter1 <VALUE> -Parameter2 <VALUE>
    ```
