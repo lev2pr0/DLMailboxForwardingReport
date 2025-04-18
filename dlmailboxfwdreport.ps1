@@ -2,7 +2,7 @@
 Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
 Main function to determine Exchange Online or On-premise and gather domains
 #>
-Function main{
+Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
         [switch]$onpremEX,
@@ -169,7 +169,7 @@ Function mailboxfwd_report {
 
 ###########################
 
-#Call of main function <name> to determine Exchange Online or On-premise, gather domains, and run report
+#Call of main function dlmailboxfwdreport to determine Exchange Online or On-premise, gather domains, and run report
 
-main 
+dlmailboxfwdreport 
 
