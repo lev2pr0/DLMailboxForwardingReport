@@ -83,7 +83,7 @@ Skips the connection to Exchange Online sessions entirely for Exchange Managemen
 
 ### Terminal view 
 
-<img width="807" alt="Screenshot 2025-04-18 at 12 19 16 PM" src="https://github.com/user-attachments/assets/a93ef097-b6ea-4167-8a19-eaf49ce9fa2d" />
+<img width="807" alt="Terminal_View" src="https://github.com/user-attachments/assets/a93ef097-b6ea-4167-8a19-eaf49ce9fa2d" />
 
 **Important Note:** Shown after connecting to Exchange Online or skiping for Exchange On-premise and providing email domains
 
