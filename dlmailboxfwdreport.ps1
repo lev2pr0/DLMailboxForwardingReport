@@ -75,7 +75,7 @@ Function report_csv {
     param(
         [array]$results,
         [string]$reportType,
-        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv" # Unique output path for each report
+        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
     )
     if ($results.Count -gt 0) {
         try {
