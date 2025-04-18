@@ -6,7 +6,8 @@ Main function to determine Exchange Online or On-premise and gather domains
 Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
-        [switch]$onpremEX
+        [switch]$onpremEX,
+        [string]$OutputPath # Allow user to provide a custom output path
     )
 
     # Connect to Exchange Online and skips if -onpremEX switch is found
@@ -75,8 +76,7 @@ Function dlmailboxfwdreport{
 Function report_csv {
     param(
         [array]$results,
-        [string]$reportType,
-        [string]$OutputPath # Allow user to provide a custom output path
+        [string]$reportType
     )
     
     # Set default OutputPath if not provided
