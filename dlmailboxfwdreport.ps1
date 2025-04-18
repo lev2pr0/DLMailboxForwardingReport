@@ -75,7 +75,8 @@ Function dlmailboxfwdreport{
 Function report_csv {
     param(
         [array]$results,
-        [string]$reportType
+        [string]$reportType,
+        [string]$OutputPath
     )
     if ($results.Count -gt 0) {
         try {
@@ -83,10 +84,10 @@ Function report_csv {
             $results | Export-Csv -Path $OutputPath -NoTypeInformation
             Write-Host "Report exported to $OutputPath" -ForegroundColor Green
         } catch {
-            Write-Host "Error exporting results to CSV: $_" -ForegroundColor Red
+            Write-Host "Error exporting results to CSV: $_ `n" -ForegroundColor Red
         }
     } else {
-        Write-Host "No results to export." -ForegroundColor Yellow
+        Write-Host "No results to export. `n" -ForegroundColor Yellow
     }
 }
 
@@ -124,7 +125,7 @@ Function publicDL_report {
         }
 
     # Export results to CSV
-    report_csv -results $results -reportType "publicDLreport"
+    report_csv -results $results -reportType "publicDLreport" -OutputPath $OutputPath
     # Display results in console  
 }
 
@@ -159,13 +160,11 @@ Function mailboxfwd_report {
     }
 
     # Export results to CSV
-    report_csv -results $results -reportType "mailboxfwdreport"
+    report_csv -results $results -reportType "mailboxfwdreport" -OutputPath $OutputPath
     # Display results in console    
 }
 
-###########################TO Delete Line when done testing#########################
+#Call to main function dlmailboxfwdreport to determine Exchange Online or On-premise, gather domains, and run report functions
 
-#Call of main function dlmailboxfwdreport to determine Exchange Online or On-premise, gather domains, and run report
-
-dlmailboxfwdreport 
+dlmailboxfwdreport
 
