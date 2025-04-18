@@ -75,7 +75,8 @@ Function dlmailboxfwdreport{
 Function report_csv {
     param(
         [array]$results,
-        [string]$reportType
+        [string]$reportType,
+        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
     )
     
     if ($results.Count -gt 0) {
