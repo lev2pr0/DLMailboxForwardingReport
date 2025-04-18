@@ -123,7 +123,7 @@ Function publicDL_report {
         }
 
     # Export results to CSV
-    report_csv -results $results
+    report_csv -results $results -outputPath $OutputPath
     # Display results in console  
 }
 
@@ -158,11 +158,11 @@ Function mailboxfwd_report {
     }
 
     # Export results to CSV
-    report_csv -results $results
+    report_csv -results $results -outputPath $OutputPath
     # Display results in console    
 }
 
-###########################
+###########################TO Delete Line when done testing#########################
 
 #Call of main function dlmailboxfwdreport to determine Exchange Online or On-premise, gather domains, and run report
 
