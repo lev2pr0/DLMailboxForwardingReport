@@ -125,7 +125,7 @@ Function publicDL_report {
         }
 
     # Export results to CSV
-    report_csv -results $results -reportType "publicDLreport" -OutputPath $OutputPath
+    report_csv -results $results -reportType "publicDLreport"
     # Display results in console  
 }
 
@@ -160,7 +160,7 @@ Function mailboxfwd_report {
     }
 
     # Export results to CSV
-    report_csv -results $results -reportType "mailboxfwdreport" -OutputPath $OutputPath
+    report_csv -results $results -reportType "mailboxfwdreport"
     # Display results in console    
 }
 
