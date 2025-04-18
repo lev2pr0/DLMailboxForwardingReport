@@ -74,10 +74,10 @@ Skips the connection to Exchange Online sessions entirely for Exchange Managemen
 <br></br>
 ## Demo
 
-### Report for Public Distribution Lists in directory
-![Screenshot_CSVinDirectory](https://github.com/user-attachments/assets/1617384b-65c4-40fa-868e-0f1c7b19d49f)
+### Report in directory
+![image001](https://github.com/user-attachments/assets/8f528909-5e27-41c8-a797-0eb32fe5a513)
 
-**Important Note:** CSV report will show as *PublicDLreport_yyyyMMdd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
+**Important Note:** CSV report will show as *publicDLreport_yyyy-MM-dd_HHmmss.csv* or *mailboxfwdreport_yyyy-MM-dd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
 
 #
 
@@ -86,13 +86,6 @@ Skips the connection to Exchange Online sessions entirely for Exchange Managemen
 
 
 **Important Note:** PrimarySMTPAddress will show empty for internal members still apart of group with no mailbox. This will show an error in terminal and will be excluded from CSV report.
-
----
-
-### Report for Mailbox Forwarding in directory
-![Screenshot_CSVinDirectory](https://github.com/user-attachments/assets/df015eb1-14cd-465b-a9b3-8dbf36393279)
-
-**Important Note:** CSV report will show as *MailboxFWDReport_yyyyMMdd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
 
 #
 
