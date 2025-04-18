@@ -55,29 +55,44 @@ Skips the connection to Exchange Online sessions entirely for Exchange Managemen
 
 ### Run the function to generate a report for Exchange Online examples
 ```powershell
-.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports"
+.\dlmailboxfwdreport.ps1
 ```
 ```powershell
 .\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com"
 ```
+```powershell
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports\ReportName.csv"
+```
+
 
 #
 
 ### Run the function to generate a report for Exchange On-Premise examples
 ```powershell
-.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports" -onpremEX 
+.\dlmailboxfwdreport.ps1 -onpremEX 
 ```
 ```powershell
 .\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -onpremEX
+```
+```powershell
+.\dlmailboxfwdreport.ps1 -Domains "domain1.com,domain2.com" -OutputPath "C:\Reports\ReportName.csv" -onpremEX 
 ```
 
 <br></br>
 ## Demo
 
+### Terminal view 
+
+<img width="807" alt="Screenshot 2025-04-18 at 12 19 16 PM" src="https://github.com/user-attachments/assets/a93ef097-b6ea-4167-8a19-eaf49ce9fa2d" />
+
+**Important Note:** Shown after connecting to Exchange Online or skiping for Exchange On-premise and providing email domains
+
+#
+
 ### Report in directory
 ![image001](https://github.com/user-attachments/assets/8f528909-5e27-41c8-a797-0eb32fe5a513)
 
-**Important Note:** CSV report will show as *publicDLreport_yyyy-MM-dd_HHmmss.csv* or *mailboxfwdreport_yyyy-MM-dd_HHmmss.csv* in current directory of terminal if ```-OutputPath``` not specified.
+**Important Note:** CSV report will show as **publicDLreport_yyyy-MM-dd_HHmmss.csv** or **mailboxfwdreport_yyyy-MM-dd_HHmmss.csv** in current directory of terminal if ```-OutputPath``` not specified.
 
 #
 
