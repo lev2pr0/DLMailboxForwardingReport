@@ -25,22 +25,22 @@ Function dlmailboxfwdreport{
         Write-Host "Existing script. Goodbye.`n" -ForegroundColor Red
         return
             }
-    } else { # Skip Exchange Online session check and connection
-        Write-Host "Skipping Exchange Online connection as -onpremEX is provided.`n" -ForegroundColor Cyan
+        } else { # Skip Exchange Online session check and connection
+            Write-Host "Skipping Exchange Online connection as -onpremEX is provided.`n" -ForegroundColor Cyan
     }
 
     # Gather domains to consider internal for report
     if (($Domains.count -lt 1) -or ($Domains[0].length -lt 1)) {    
     $Domains = ((Read-host "Type in a comma-separated list of your email domains, IE domain1.com,domain2.com") -replace ('@|"| ','')) -split ","
     
-    # Validate domains
-    $Domains = $Domains | Where-Object { $_ -match '^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' }
-    if ($Domains.count -lt 1) { # Handle errors for invalid user inputs
-        Write-Host "No valid domains provided." -ForegroundColor Red
-        Write-Host "Please provide a valid domain list in the format: domain1.com,domain2.com`n" -ForegroundColor Red
-        Write-Host "Existing script. Goodbye.`n" -ForegroundColor Red
-        return
-        }
+        # Validate domains
+        $Domains = $Domains | Where-Object { $_ -match '^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' }
+        if ($Domains.count -lt 1) { # Handle errors for invalid user inputs
+            Write-Host "No valid domains provided." -ForegroundColor Red
+            Write-Host "Please provide a valid domain list in the format: domain1.com,domain2.com`n" -ForegroundColor Red
+            Write-Host "Existing script. Goodbye.`n" -ForegroundColor Red
+            return
+            }
     }
 
     # Reporting function start
@@ -62,13 +62,13 @@ Function dlmailboxfwdreport{
 
     # Run functions based on user input
     if ($reportType -eq "publicDL") {
-        publicDL_report
-    } elseif ($reportType -eq "mailboxfwd") {
-        mailboxfwd_report
-    } elseif ($reportType -eq "exit") {
-        Write-Host "Existing script. Thanks. Goodbye.`n" -ForegroundColor Red
-        break
-    }
+            publicDL_report
+        } elseif ($reportType -eq "mailboxfwd") {
+            mailboxfwd_report
+        } elseif ($reportType -eq "exit") {
+            Write-Host "Existing script. Thanks. Goodbye.`n" -ForegroundColor Red
+            return
+        }
 }
 
 # Export results to CSV for report function
@@ -81,14 +81,15 @@ Function report_csv {
     if ($results.Count -gt 0) {
         try {
             Write-Host "Exporting results to CSV...`n" -ForegroundColor Cyan
-            $results | Export-Csv -Path $OutputPath -NoTypeInformation
+            $results | Export-Csv -Path $OutputPath -NoTypeInformation -Force
             Write-Host "Report exported to $OutputPath" -ForegroundColor Green
         } catch {
             Write-Host "Error exporting results to CSV: $_ `n" -ForegroundColor Red
+            }
+        } else {
+            Write-Host "No results to export. `n" -ForegroundColor Yellow
+            return
         }
-    } else {
-        Write-Host "No results to export. `n" -ForegroundColor Yellow
-    }
 }
 
 # Public DL Report Function to generate a report for public distribution lists
