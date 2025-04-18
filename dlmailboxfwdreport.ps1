@@ -6,7 +6,7 @@ Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
         [switch]$onpremEX,
-        [string]$OutputPath = "MailboxFWDReport_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv" # Default output path
+        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv" # Unique output path for each report
     )
 
     # Connect to Exchange Online and skips if -onpremEX switch is found
@@ -49,26 +49,21 @@ Function dlmailboxfwdreport{
     do {
         Write-Host "Available reports: `n" -ForegroundColor Yellow
         Write-Host "1. publicDL - Public Distribution List Report" -ForegroundColor Yellow
-        Write-Host "2. mailboxfwd - Mailbox Forwarding Report" -ForegroundColor Yellow
-        Write-Host "3. both - Run both reports `n" -ForegroundColor Yellow
+        Write-Host "2. mailboxfwd - Mailbox Forwarding Report `n" -ForegroundColor Yellow
         Write-Host "Type 'exit' to quit the script. `n" -ForegroundColor Yellow
-        $reportType = Read-Host "Enter the report type you want to run (publicDL, mailboxfwd, both)"
+        $reportType = Read-Host "Enter the report type you want to run (publicDL or mailboxfwd)"
         
         if ([string]::IsNullOrEmpty($reportType)) {
             Write-Host "Input cannot be empty. Please enter a valid report type." -ForegroundColor Red
-        } elseif ($reportType -notin @("publicDL", "mailboxfwd", "both", "exit")) {
-            Write-Host "Invalid report type. Please enter 'publicDL', 'mailboxfwd', or 'both'." -ForegroundColor Red
+        } elseif ($reportType -notin @("publicDL", "mailboxfwd", "exit")) {
+            Write-Host "Invalid report type. Please enter 'publicDL' or 'mailboxfwd'" -ForegroundColor Red
         }
-    } while ([string]::IsNullOrEmpty($reportType) -or $reportType -notin @("publicDL", "mailboxfwd", "both", "exit"))
+    } while ([string]::IsNullOrEmpty($reportType) -or $reportType -notin @("publicDL", "mailboxfwd", "exit"))
 
     # Run functions based on user input
     if ($reportType -eq "publicDL") {
         publicDL_report
     } elseif ($reportType -eq "mailboxfwd") {
-        mailboxfwd_report
-    } elseif ($reportType -eq "both") {
-        Write-Host "Running both reports... `n" -ForegroundColor Green
-        publicDL_report
         mailboxfwd_report
     } elseif ($reportType -eq "exit") {
         Write-Host "Existing script. Thanks. Goodbye.`n" -ForegroundColor Red
