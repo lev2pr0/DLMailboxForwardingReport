@@ -76,9 +76,14 @@ Function report_csv {
     param(
         [array]$results,
         [string]$reportType,
-        [string]$OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv" # Unique output path for each report
+        [string]$OutputPath # Allow user to provide a custom output path
     )
     
+    # Set default OutputPath if not provided
+    if (-not $OutputPath) {
+        $OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv"
+    }
+
     if ($results.Count -gt 0) {
         try {
             Write-Host "Exporting results to CSV...`n" -ForegroundColor Cyan
@@ -86,11 +91,11 @@ Function report_csv {
             Write-Host "Report exported to $OutputPath" -ForegroundColor Green
         } catch {
             Write-Host "Error exporting results to CSV: $_ `n" -ForegroundColor Red
-            }
-        } else {
-            Write-Host "No results to export. `n" -ForegroundColor Yellow
-            return
         }
+    } else {
+        Write-Host "No results to export. `n" -ForegroundColor Yellow
+        return
+    }
 }
 
 # Public DL Report Function to generate a report for public distribution lists
