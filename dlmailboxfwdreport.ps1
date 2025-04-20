@@ -1,8 +1,6 @@
-<#
-Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
-Main function to determine Exchange Online or On-premise and gather domains
-#>
+#Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
 
+#dlmailboxfwdreport function to determine Exchange Online or On-premise and gather domains
 Function dlmailboxfwdreport{
     param(
         [string[]]$Domains=@(),
