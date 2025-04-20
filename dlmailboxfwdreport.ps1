@@ -1,10 +1,10 @@
-#Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
+# Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
 
-#dlmailboxfwdreport function to determine Exchange Online or On-premise and gather domains
+# dlmailboxfwdreport function to determine Exchange Online or On-premise and gather domains
 Function dlmailboxfwdreport{
     param(
-        [string[]]$Domains=@(),
-        [switch]$onpremEX,
+        [string[]]$Domains=@(), # Allow user to provide domains prior to prompt for array
+        [switch]$onpremEX, # Skip Exchange Online connection for Exchange On-prem
         [string]$OutputPath # Allow user to provide a custom output path
     )
 
