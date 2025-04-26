@@ -1,5 +1,105 @@
 # Please review README.md(https://github.com/lev2pr0/dlmailboxfwdreport/blob/main/README.md) before running this script
 
+# Public DL Report Function to generate a report for public distribution lists
+Function publicDL_report {
+    # Get all distribution groups that are public
+    try {
+        Write-Host "Running Public Distribution Report... `n" -ForegroundColor Cyan
+        $public_groups = Get-DistributionGroup | Where-Object {$_.RequireSenderAuthenticationEnabled -eq $false}
+    } catch {
+        Write-Host "Error retrieving public distribution group: $($_.PrimarySmtpAddress): $_ `n" -ForegroundColor Red
+        return
+    }
+
+    # Get members of each public distribution group
+    $results = @()
+    $public_groups | ForEach-Object {
+        Write-host "Processing members of $($_.PrimarySmtpAddress) `n" -ForegroundColor Cyan
+        $members = Get-DistributionGroupMember -Identity $_.name
+        foreach ($member in $members) {
+             # Get recipient details for each member
+                $recipient = Get-Recipient -Identity $member.name
+                if ($null -ne $recipient) {
+                    $recipientDomain = ($recipient.PrimarySmtpAddress -split "@")[1]
+                    $results += [PSCustomObject]@{
+                        PrimarySmtpAddress = $recipient.PrimarySmtpAddress
+                        Organization = if ($recipientDomain -in $Domains) { "Internal" } else { "External" }
+                        GroupEmail = $_.PrimarySmtpAddress
+                        GroupType = $_.RecipientTypeDetails
+                    }
+                } else {
+                    Write-Host "Recipient not found for member $($member.name) `n" -ForegroundColor Yellow
+                }
+            }
+        }
+
+    # Export results to CSV
+    report_csv -results $results -reportType "publicDLreport"
+}
+
+
+#Mailbox Forward Report Function to pull forwarding report for User and Shared Mailbox
+Function mailboxfwd_report {
+    # Get all user and shared mailboxes with forwardingSMTPaddress
+    Write-Host "Running Mailbox Forwarding Report...`n" -ForegroundColor Cyan
+    try { 
+    $mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
+        $_.RecipientTypeDetails -eq "UserMailbox" -or $_.RecipientTypeDetails -eq "SharedMailbox"
+        } | Where-Object {$_.ForwardingSmtpAddress -ne $null}
+    } catch { # Handle errors for each mailbox
+        Write-Host "Error retrieving mailboxes: $_ `n" -ForegroundColor Red
+        return
+    }
+
+    # Search for mailboxes with forwarding addresses configured
+    # Split domains to compare if Internal or External
+    $results = @()
+    $mailboxes | ForEach-Object {
+        $forwardingaddress = $_.ForwardingSmtpAddress.ToString()
+        $domainPart = ($forwardingaddress -split "@")[1]
+        $isInternal = $Domains -contains $domainPart
+        # Build report of mailboxes with forwardingSMTPaddress configured
+        $results += [PSCustomObject]@{
+            DisplayName             = $_.DisplayName
+            PrimarySmtpAddress      = $_.PrimarySmtpAddress
+            ForwardingSmtpAddress   =  if ($_.ForwardingSmtpAddress -match ":") { ($forwardingaddress -split ":")[1] } else { $_.ForwardingSmtpAddress }
+            DeliverToMailboxAndForward = $_.DeliverToMailboxAndForward
+            Organization        = if ($isInternal) { "Internal" } else { "External" }
+        }
+    }
+
+    # Export results to CSV
+    report_csv -results $results -reportType "mailboxfwdreport"
+}
+
+
+# Export results to CSV for report function
+Function report_csv {
+    param(
+        [array]$results,
+        [string]$reportType
+    )
+    
+    # Set default OutputPath if not provided
+    if (-not $OutputPath) {
+        $OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv"
+    }
+
+    if ($results.Count -gt 0) {
+        try {
+            Write-Host "Exporting results to CSV...`n" -ForegroundColor Cyan
+            $results | Export-Csv -Path $OutputPath -NoTypeInformation -Force
+            Write-Host "Report exported to $OutputPath" -ForegroundColor Green
+        } catch {
+            Write-Host "Error exporting results to CSV: $_ `n" -ForegroundColor Red
+        }
+    } else {
+        Write-Host "No results to export. `n" -ForegroundColor Yellow
+        return
+    }
+}
+
+
 # dlmailboxfwdreport function to determine Exchange Online or On-premise and gather domains
 Function dlmailboxfwdreport{
     param(
@@ -70,106 +170,8 @@ Function dlmailboxfwdreport{
         }
 }
 
-# Export results to CSV for report function
-Function report_csv {
-    param(
-        [array]$results,
-        [string]$reportType
-    )
-    
-    # Set default OutputPath if not provided
-    if (-not $OutputPath) {
-        $OutputPath = "$($reportType)_$(Get-Date -Format 'yyyy-MM-dd_HHmmss').csv"
-    }
 
-    if ($results.Count -gt 0) {
-        try {
-            Write-Host "Exporting results to CSV...`n" -ForegroundColor Cyan
-            $results | Export-Csv -Path $OutputPath -NoTypeInformation -Force
-            Write-Host "Report exported to $OutputPath" -ForegroundColor Green
-        } catch {
-            Write-Host "Error exporting results to CSV: $_ `n" -ForegroundColor Red
-        }
-    } else {
-        Write-Host "No results to export. `n" -ForegroundColor Yellow
-        return
-    }
-}
-
-# Public DL Report Function to generate a report for public distribution lists
-Function publicDL_report {
-    # Get all distribution groups that are public
-    try {
-        Write-Host "Running Public Distribution Report... `n" -ForegroundColor Cyan
-        $public_groups = Get-DistributionGroup | Where-Object {$_.RequireSenderAuthenticationEnabled -eq $false}
-    } catch {
-        Write-Host "Error retrieving public distribution group: $($_.PrimarySmtpAddress): $_ `n" -ForegroundColor Red
-        return
-    }
-
-    # Get members of each public distribution group
-    $results = @()
-    $public_groups | ForEach-Object {
-        Write-host "Processing members of $($_.PrimarySmtpAddress) `n" -ForegroundColor Cyan
-        $members = Get-DistributionGroupMember -Identity $_.name
-        foreach ($member in $members) {
-             # Get recipient details for each member
-                $recipient = Get-Recipient -Identity $member.name
-                if ($null -ne $recipient) {
-                    $recipientDomain = ($recipient.PrimarySmtpAddress -split "@")[1]
-                    $results += [PSCustomObject]@{
-                        PrimarySmtpAddress = $recipient.PrimarySmtpAddress
-                        Organization = if ($recipientDomain -in $Domains) { "Internal" } else { "External" }
-                        GroupEmail = $_.PrimarySmtpAddress
-                        GroupType = $_.RecipientTypeDetails
-                    }
-                } else {
-                    Write-Host "Recipient not found for member $($member.name) `n" -ForegroundColor Yellow
-                }
-            }
-        }
-
-    # Export results to CSV
-    report_csv -results $results -reportType "publicDLreport"
-    # Display results in console  
-}
-
-#Mailbox Forward Report Function to pull forwarding report for User and Shared Mailbox
-Function mailboxfwd_report {
-    # Get all user and shared mailboxes with forwardingSMTPaddress
-    Write-Host "Running Mailbox Forwarding Report...`n" -ForegroundColor Cyan
-    try { 
-    $mailboxes = Get-Mailbox -ResultSize Unlimited | Where-Object {
-        $_.RecipientTypeDetails -eq "UserMailbox" -or $_.RecipientTypeDetails -eq "SharedMailbox"
-        } | Where-Object {$_.ForwardingSmtpAddress -ne $null}
-    } catch { # Handle errors for each mailbox
-        Write-Host "Error retrieving mailboxes: $_ `n" -ForegroundColor Red
-        return
-    }
-
-    # Search for mailboxes with forwarding addresses configured
-    # Split domains to compare if Internal or External
-    $results = @()
-    $mailboxes | ForEach-Object {
-        $forwardingaddress = $_.ForwardingSmtpAddress.ToString()
-        $domainPart = ($forwardingaddress -split "@")[1]
-        $isInternal = $Domains -contains $domainPart
-        # Build report of mailboxes with forwardingSMTPaddress configured
-        $results += [PSCustomObject]@{
-            DisplayName             = $_.DisplayName
-            PrimarySmtpAddress      = $_.PrimarySmtpAddress
-            ForwardingSmtpAddress   =  if ($_.ForwardingSmtpAddress -match ":") { ($forwardingaddress -split ":")[1] } else { $_.ForwardingSmtpAddress }
-            DeliverToMailboxAndForward = $_.DeliverToMailboxAndForward
-            Organization        = if ($isInternal) { "Internal" } else { "External" }
-        }
-    }
-
-    # Export results to CSV
-    report_csv -results $results -reportType "mailboxfwdreport"
-    # Display results in console    
-}
-
-#Call to main function dlmailboxfwdreport to determine Exchange Online or On-premise, gather domains, and run report functions
+#Call to main function dlmailboxfwdreport 
 
 dlmailboxfwdreport
 
