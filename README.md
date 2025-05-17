@@ -132,6 +132,7 @@ Install-Module ExchangeOnlineManagement -Force
 
 -- The  ```-onpremEX``` switch is required when running function in Exchange Management Shell
 
+-- For Exchange Online, you must include your Microsoft 365 tenant's onmicrosoft domain(s) to be considered internal in report
 
 -- Always test the script in a non-production environment first.
 
