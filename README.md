@@ -134,14 +134,13 @@ Install-Module ExchangeOnlineManagement -Force
 
 -- For Exchange Online, you must include your Microsoft 365 tenant's onmicrosoft domain(s) to be considered internal in report
 
--- Always test the script in a non-production environment first.
+-- For Exchange Online, report results may vary due to dependency on Microsoft online services and data
 
+-- Always test the script in a non-production environment first.
 
 -- Review the script's code and understand its functionality before execution.
 
-
 -- The script may require specific permissions or elevated privileges to run correctly.
-
 
 -- The script's behavior may vary depending on the system configuration and environment.
 
